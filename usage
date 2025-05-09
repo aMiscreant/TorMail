@@ -1,0 +1,55 @@
+🚀 Usage
+1. Prepare GPG key directory
+
+mkdir -p ~/.tormail_keys
+
+2. Generate and save your Tor hidden service key:
+
+mkdir -p ~/.icebridge/tor
+echo "ED25519-V3:<your_key_here>" > ~/.icebridge/tor/key
+
+    NOTE: You can generate this key using stem or Tor itself via ADD_ONION command.
+
+3. Run TorMail
+
+python tormail.py
+
+Once running, it will:
+
+    Spawn a Flask server bound to 0.0.0.0:5000
+
+    Start an ephemeral Tor hidden service pointing to it
+
+    Output your .onion address to the terminal
+
+🚀 Endpoints
+
+    / – Login page
+
+    /create – Create a new GPG-secured inbox
+
+    /login – Validate access using GPG identity
+
+    /inbox – View and decrypt received messages
+
+    /send – Send encrypted messages to other users
+
+    /decrypt – On-demand decryption of individual messages
+
+    /logout – Clear session
+
+    /<random> – Catch-all 404
+
+💡 Example Use
+
+    Create a user via /create
+
+    Login using the username and passphrase
+
+    Use /send to deliver messages to other TorMail users
+
+    Check /inbox to read your encrypted messages in-session
+
+⚠️ Disclaimer
+
+This project is educational and should not be considered production-grade. No persistent encryption or storage safeguards are applied beyond memory. Use at your own risk.
