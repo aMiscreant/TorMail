@@ -42,8 +42,6 @@
 
 ## 🚀 Future Development Goals
 
-![Uploading ComingSoon.png…]()
-
 TorMail is evolving. Future versions aim to:
 
 - **Implement offline message storage:**
