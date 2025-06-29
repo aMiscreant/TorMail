@@ -34,7 +34,7 @@ input, textarea {
 }
 
 button {
-    width: 100%;
+    width: 103.5%;
     margin-top: 1.5rem;
     padding: 0.7rem;
     background: #33ff33;
@@ -43,6 +43,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 a {

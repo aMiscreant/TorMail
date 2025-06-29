@@ -1,0 +1,17 @@
+{% if inbox %}
+    <ul>
+    {% for msg in inbox %}
+        <li>
+            <strong>From:</strong> {{ msg['from'] }} <br>
+            <strong>Message:</strong> {{ msg['content'] }} <br>
+            <form action="/decrypt" method="post">
+                {{ decrypt_form.hidden_tag() }}
+                <input type="hidden" name="message_id" value="{{ loop.index0 }}">
+                <button type="submit" class="btn btn-primary">Decrypt Message</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No messages yet.</p>
+{% endif %}

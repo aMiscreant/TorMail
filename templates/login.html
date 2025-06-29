@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -8,11 +9,42 @@
 <body>
     <div class="container">
         <h1>Login</h1>
-            <form method="POST" action="/login">
-                <input name="username" placeholder="Username">
-                <input name="token" placeholder="Token" type="password">
-                <button type="submit">Login</button>
-            </form>
+
+        {% if form.errors %}
+            <div class="error">
+                <ul>
+                {% for field, errors in form.errors.items() %}
+                    {% for error in errors %}
+                        <li><strong>{{ field }}:</strong> {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/login">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control", placeholder="Username") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.token.label }}
+                {{ form.token(class="form-control", placeholder="Token") }}
+            </div>
+
+            <div>
+                <label for="invite">Invite Code</label>
+                {{ form.invite(class="form-control", placeholder="Invite Code") }}
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+
         <p>New here? <a href="/create">Create an account</a></p>
     </div>
 </body>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ user }}'s Inbox</title>
@@ -29,14 +30,15 @@
     <div class="container">
         <script>
             function fetchInbox() {
-                fetch('/inbox?user={{ user }}')
+                fetch('/inbox/messages?user={{ user }}')
                     .then(response => response.text())
                     .then(data => {
                         document.getElementById('inbox-content').innerHTML = data;
                     })
                     .catch(error => console.error('Error fetching inbox:', error));
             }
-            setInterval(fetchInbox, 10000); // Refresh inbox every 10 seconds
+
+            setInterval(fetchInbox, 10000);
         </script>
 
         <h1>Welcome, {{ user }}</h1>
@@ -49,8 +51,9 @@
                     <strong>From:</strong> {{ msg['from'] }} <br>
                     <strong>Encrypted content:</strong> {{ msg['encrypted'] }} <br>
                     <form action="/decrypt" method="post">
+                        {{ decrypt_form.hidden_tag() }}
                         <input type="hidden" name="message_id" value="{{ loop.index0 }}">
-                        <input type="submit" value="Decrypt Message">
+                        <button type="submit" class="btn btn-primary">Decrypt Message</button>
                     </form>
                 </li>
             {% endfor %}
@@ -62,11 +65,18 @@
 
         <h2>Send a message</h2>
         <form action="/send" method="post">
-            <label for="recipient">To:</label>
-            <input type="text" name="recipient" required><br>
-            <label for="message">Message:</label><br>
-            <textarea name="message" rows="4" cols="50" required></textarea><br>
-            <input type="submit" value="Send">
+            {{ send_form.hidden_tag() }}
+            <div class="form-group">
+                {{ send_form.recipient.label }}
+                {{ send_form.recipient(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ send_form.message.label }}
+                {{ send_form.message(class="form-control") }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
         </form>
     </div>
 </body>

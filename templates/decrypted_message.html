@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Decrypted Message</title>
@@ -11,24 +12,56 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            background-color: #111;
+            color: #33ff33;
+            font-family: monospace, monospace;
+        }
+        .container {
+            background: #000;
+            border: 1px solid #33ff33;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 90vw;
+            word-break: break-word;
+        }
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .notice {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #66ff66aa;
+        }
+        .logout {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+        .logout a {
+            color: #00ffff;
+            font-weight: bold;
+        }
+        .logout a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+    <div class="logout">
+        <a href="/logout">⎋ Logout</a>
+    </div>
+
     <div class="container">
         <h1>🔓 Decrypted Message</h1>
-        <div style="
-            background: #000;
-            border: 1px solid #33ff33;
-            padding: 1rem;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            margin-top: 1rem;
-            color: #33ff33;
-        ">
-            {{ content }}
-        </div>
-        <a href="/inbox?user={{ user }}" style="margin-top: 1rem; display: inline-block;">⬅ Back to Inbox</a>
+        <pre style="white-space: pre-wrap;">{{ content | e }}</pre>
+        <div class="notice">This message was decrypted for your eyes only.</div>
+        <a href="/inbox?user={{ user }}">⬅ Back to Inbox</a>
     </div>
 </body>
 </html>

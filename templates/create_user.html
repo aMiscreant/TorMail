@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Create Account - TorMail</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="form-container">
         <h2>Create an Account</h2>
-            <form method="POST" action="/create">
-                <input name="username" placeholder="Username">
-                <input name="token" placeholder="Token" type="password">
-                <button type="submit">Create Account</button>
-            </form>
+        <form method="POST" action="/create">
+            {{ form.hidden_tag() }}
+        <label for="username">Username</label>
+            {{ form.username(class="form-control", placeholder="Username") }}
+        <label for="token">Token</label>
+            {{ form.token(class="form-control", placeholder="Token") }}
+        <label for="invite">Invite Code</label>
+            {{ form.invite(class="form-control", placeholder="Invite Code") }}
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
         <p>Already have an account? <a href="/">Login</a></p>
     </div>
 </body>

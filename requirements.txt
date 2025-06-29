@@ -1,6 +1,7 @@
-python-gnupg==0.5.4
-Flask==3.1.0
-Flask-Limiter==3.12
-stem==1.8.2
-psutil==7.0.0
-watchdog==6.0.0
+python-gnupg~=0.5.4
+Flask~=3.1.0
+Flask-Limiter~=3.12
+stem~=1.8.2
+WTForms~=3.2.1
+psutil~=7.0.0
+watchdog~=6.0.0

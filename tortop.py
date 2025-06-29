@@ -37,7 +37,7 @@ def draw_graph(stdscr):
     curses.init_pair(5, curses.COLOR_CYAN, curses.COLOR_BLACK)  # Cyan for new file change types
 
     # Setup directory monitoring
-    directories = [os.path.expanduser("~/.icebridge"), "/etc/tor", "/home", "/var/log"]
+    directories = [os.path.expanduser("~/.icebridge"), "/etc/tor", "~/.tormail_keys", "/var/log"]
     event_handler = DirectoryMonitor(stdscr, directories)
     observer = Observer()
     for directory in directories:
