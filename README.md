@@ -70,6 +70,7 @@ Clone and launch:
 git clone https://github.com/aMiscreant/TorMail
 cd TorMail
 python3 tormail.py
+```
 
 ![ComingSoon](https://github.com/user-attachments/assets/1f33ef23-6a40-4735-ba20-ad16f4855afd)
 
