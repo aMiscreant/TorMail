@@ -40,7 +40,7 @@
 
 ---
 
-## 🚀 Future Development Goals
+## Future Development Goals
 
 TorMail is evolving. Future versions aim to:
 
@@ -64,18 +64,37 @@ TorMail is evolving. Future versions aim to:
 
 ## Running TorMail
 
-Clone and launch:
+- Clone and launch:
 
 ```bash
 git clone https://github.com/aMiscreant/TorMail
 cd TorMail
-generate cert.pem and key.pem
-$openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/CN=YOUR_VANITY.onion"
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+# generate cert.pem and key.pem for https
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/CN=YOUR_VANITY.onion"
 python3 tormail.py
 ```
 
-![ComingSoon](https://github.com/user-attachments/assets/1f33ef23-6a40-4735-ba20-ad16f4855afd)
+**ROADMAP** to __v1.0__
 
+>
+![ComingSoon](https://github.com/user-attachments/assets/1f33ef23-6a40-4735-ba20-ad16f4855afd)
+>
+
+**ROADMAP** to branch __v1-s1__
+
+>
+Encrypted NAND Flash to store keys.
+>
+
+
+---
+
+DEV NOTES
+
+---
 
 # **Usage**
 
