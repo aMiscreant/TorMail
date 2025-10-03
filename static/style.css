@@ -1,56 +1,110 @@
+/* === GLOBAL COLORS === */
+:root {
+    --bg-dark: #0d0d0d;
+    --bg-panel: #161616;
+    --bg-alt: #111;
+    --fg-text: #33ff33;
+    --fg-text-muted: #99ff99;
+    --fg-link: #00ffff;
+    --fg-link-hover: #66ffff;
+    --accent: #00ff00;
+    --danger: #ff5555;
+    --danger-bg: #220000;
+    --radius: 12px;
+    --transition: 0.2s ease-in-out;
+}
+
+/* === BASE STYLE (inbox/main) === */
 body {
-    background-color: #0d0d0d;
-    color: #33ff33;
-    font-family: monospace;
+    background-color: var(--bg-dark);
+    color: var(--fg-text);
+    font-family: "Fira Code", monospace, monospace;
     padding: 2rem;
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 500px;
+    max-width: 600px;
     margin: auto;
-    background: #1a1a1a;
+    background: var(--bg-panel);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ff00;
+    border-radius: var(--radius);
+    box-shadow: 0 0 20px rgba(0,255,0,0.15);
+    transition: transform var(--transition), box-shadow var(--transition);
 }
 
-h1 {
+.container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0,255,0,0.25);
+}
+
+h1, h2 {
     text-align: center;
+    margin-bottom: 1rem;
+    color: var(--fg-text);
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
+/* === FORMS === */
 label {
     display: block;
     margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--fg-text-muted);
 }
 
 input, textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     background-color: #000;
-    color: #33ff33;
-    border: 1px solid #33ff33;
-    border-radius: 5px;
+    color: var(--fg-text);
+    border: 1px solid #222;
+    border-radius: var(--radius);
     margin-top: 0.5rem;
+    transition: border var(--transition), box-shadow var(--transition);
 }
 
-button {
-    width: 103.5%;
+input:focus, textarea:focus {
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 8px rgba(0,255,0,0.3);
+    outline: none;
+}
+
+/* === BUTTONS === */
+button, .btn-primary {
+    width: 100%;
     margin-top: 1.5rem;
-    padding: 0.7rem;
-    background: #33ff33;
+    padding: 0.85rem;
+    background: linear-gradient(90deg, var(--accent), #00cc00);
     color: #000;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius);
     cursor: pointer;
-    box-sizing: border-box;
+    transition: background var(--transition), transform var(--transition);
+    box-shadow: 0 0 10px rgba(0,255,0,0.2);
 }
 
+button:hover, .btn-primary:hover {
+    background: linear-gradient(90deg, #00ff99, var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0,255,0,0.3);
+}
+
+/* === LINKS === */
 a {
-    color: #00ffff;
+    color: var(--fg-link);
     text-decoration: none;
+    transition: color var(--transition);
 }
 
+a:hover {
+    color: var(--fg-link-hover);
+    text-decoration: underline;
+}
+
+/* === LOGOUT BUTTON === */
 .logout {
     position: absolute;
     top: 1rem;
@@ -58,11 +112,72 @@ a {
 }
 
 .logout a {
-    color: #00ffff;
-    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    background: #000;
+    border: 1px solid var(--fg-link);
+    border-radius: var(--radius);
     font-weight: bold;
+    transition: background var(--transition), color var(--transition);
 }
 
 .logout a:hover {
-    text-decoration: underline;
+    background: var(--fg-link);
+    color: #000;
+}
+
+/* === LOGIN PAGE === */
+body.login, body.create {
+    background: radial-gradient(circle at top, #111 0%, #000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+}
+
+body.login .container,
+body.create .form-container {
+    background: var(--bg-panel);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 0 25px rgba(0,255,0,0.2);
+    width: 400px;
+    text-align: center;
+}
+
+body.login .error {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* === DECRYPTED MESSAGE === */
+body.decrypted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg-alt) 0%, #000 100%);
+    color: var(--fg-text);
+}
+
+body.decrypted .container {
+    background: #000;
+    border: 1px solid var(--fg-text);
+    padding: 2rem;
+    border-radius: var(--radius);
+    max-width: 90vw;
+    word-break: break-word;
+    box-shadow: 0 0 25px rgba(0,255,0,0.25);
+}
+
+body.decrypted .notice {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--fg-text-muted);
 }
