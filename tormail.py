@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # aMiscreant
+"""
+ToDo
+    one consistent working directory for keys / gnupg {once working migrate to encrypted USB/SD Card}.
+    E2E - apply.
+    Fix received mail layout & visuals.
+    Generate stronger gpg keys; and encrypted the keys. Decrypt per call / use.
+"""
 import os
 import random
 import secrets
@@ -146,7 +153,7 @@ def login():
 
         stored_token = users.get(email)
         if not stored_token or stored_token != token:
-            return "❌ Invalid username or password", 403
+            return "[Error!] Invalid username or password", 403
 
         # Login successful
         session['username'] = username
@@ -183,7 +190,7 @@ def inbox():
         decrypted_messages.append({
             'id': idx,
             'from': msg['from'],
-            'content': str(decrypted) if decrypted.ok else "❌ Decryption failed"
+            'content': str(decrypted) if decrypted.ok else "[Error!] Decryption failed"
         })
 
     send_form = SendMessageForm()
@@ -331,12 +338,12 @@ def start_hidden_service():
             input(" Press Enter to shut down hidden service...")
             controller.remove_ephemeral_hidden_service(service.service_id)
         else:
-            print(" Key not found at ~/.icebridge/tor/key")
+            print("[Error!] Key not found at ~/.icebridge/tor/key")
             exit(1)
 
 if __name__ == "__main__":
     invites = load_invites()
-    print("\n[  Invite Codes for testing]")
+    print("\n[[ok!]  Invite Codes for testing]")
     for code, used in invites.items():
         status = "USED" if used else "AVAILABLE"
         print(f"  {code} → {status}")
