@@ -123,6 +123,7 @@ def create_account():
 
         email = f"{username}@tormail.onion"
         # Generate GPG key
+        # noinspection PyTypeChecker
         input_data = gpg.gen_key_input(name_email=email, passphrase=token, key_type="RSA", key_length=2048)
         key = gpg.gen_key(input_data)
         if not key.fingerprint:
