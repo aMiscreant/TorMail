@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# aMiscreant
 import curses
 import psutil
 import time
@@ -37,6 +39,7 @@ def draw_graph(stdscr):
     curses.init_pair(5, curses.COLOR_CYAN, curses.COLOR_BLACK)  # Cyan for new file change types
 
     # Setup directory monitoring
+    # Add directories for testing purposes. eventually just monitor the running dir, and syslogs related to tor.
     directories = [os.path.expanduser("~/.icebridge"), "/etc/tor", "~/.tormail_keys", "/var/log"]
     event_handler = DirectoryMonitor(stdscr, directories)
     observer = Observer()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# aMiscreant / Miscreant
+# aMiscreant
 import os
 import random
 import secrets
