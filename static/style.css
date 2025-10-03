@@ -50,3 +50,19 @@ a {
     color: #00ffff;
     text-decoration: none;
 }
+
+.logout {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+.logout a {
+    color: #00ffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout a:hover {
+    text-decoration: underline;
+}

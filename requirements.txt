@@ -5,3 +5,4 @@ stem~=1.8.2
 WTForms~=3.2.1
 psutil~=7.0.0
 watchdog~=6.0.0
+cryptography~=46.0.2

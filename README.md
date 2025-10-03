@@ -2,14 +2,14 @@
 
 **TorMail** is an experimental, ephemeral Tor hidden-service mail system built with Flask, GNUPG, and Stem. It’s designed for private, temporary communication where:
 
-✅ All messages are **end-to-end encrypted** using GPG  
-✅ User identities exist only as ephemeral GPG keys  
-✅ Messages live purely **in-memory**, leaving no disk traces  
-✅ Access happens only through a Tor hidden service  
+- All messages are **end-to-end encrypted** using GPG  
+- User identities exist only as ephemeral GPG keys  
+- Messages live purely **in-memory**, leaving no disk traces  
+- Access happens only through a Tor hidden service  
 
 ---
 
-## 🔐 How It Works
+## How It Works
 
 - **Ephemeral Tor Hidden Service**  
     Launches a unique `.onion` address on startup, forwarding traffic to the Flask app.
@@ -32,7 +32,7 @@
 
 ---
 
-## ⚠️ Limitations & Warnings
+## Limitations & Warnings
 
 - **No persistence.** Messages vanish if the server restarts.
 - Not production-grade — research use only.
@@ -62,39 +62,69 @@ TorMail is evolving. Future versions aim to:
 
 ---
 
-## 💻 Running TorMail
+## Running TorMail
 
 Clone and launch:
 
 ```bash
 git clone https://github.com/aMiscreant/TorMail
 cd TorMail
+generate cert.pem and key.pem
+$openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/CN=YOUR_VANITY.onion"
 python3 tormail.py
 ```
 
 ![ComingSoon](https://github.com/user-attachments/assets/1f33ef23-6a40-4735-ba20-ad16f4855afd)
 
-### ✅ `LICENSE` (MIT)
 
-```text
-MIT License
+# **Usage**
 
-Copyright (c) 2025 Source Direct Hub
+## 1. Prepare GPG key directory
+```bash
+mkdir -p ~/.tormail_keys
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights  
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
-copies of the Software, and to permit persons to whom the Software is  
-furnished to do so, subject to the following conditions:
+```
 
-The above copyright notice and this permission notice shall be included in  
-all copies or substantial portions of the Software.
+## 2. Generate and save your Tor hidden service key:
+```bash
+mkdir -p ~/.icebridge/tor
+echo "ED25519-V3:<your_key_here>" > ~/.icebridge/tor/key
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN  
-THE SOFTWARE.
+```
+
+    NOTE: You can generate this key using stem or Tor itself via ADD_ONION command.
+
+## 3. Run TorMail
+python tormail.py
+
+### Once running, it will:
+    Spawn a Flask server bound to 0.0.0.0:5000
+    Start an ephemeral Tor hidden service pointing to it
+    Output your .onion address to the terminal
+
+### Endpoints:
+    / – Login page
+    /create – Create a new GPG-secured inbox
+    /login – Validate access using GPG identity
+    /inbox – View and decrypt received messages
+    /send – Send encrypted messages to other users
+    /decrypt – On-demand decryption of individual messages
+    /logout – Clear session
+    /<random> – Catch-all 404
+
+### Example Use
+    Create a user via /create
+    Login using the username and passphrase
+    Use /send to deliver messages to other TorMail users
+    Check /inbox to read your encrypted messages in-session
+
+
+generate cert.pem and key.pem
+```bash
+$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/CN=YOUR_VANITY.onion"
+
+```
+
+# Disclaimer
+
+**This project is educational and should not be considered production-grade. No persistent encryption or storage safeguards are applied beyond memory. Use at your own risk.**

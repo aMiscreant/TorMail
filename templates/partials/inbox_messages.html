@@ -3,7 +3,7 @@
     {% for msg in inbox %}
         <li>
             <strong>From:</strong> {{ msg['from'] }} <br>
-            <strong>Message:</strong> {{ msg['content'] }} <br>
+            <strong>Encrypted content:</strong> {{ msg['encrypted'] }} <br>
             <form action="/decrypt" method="post">
                 {{ decrypt_form.hidden_tag() }}
                 <input type="hidden" name="message_id" value="{{ loop.index0 }}">
